@@ -1,5 +1,5 @@
 import json
-from scraper.linkedin_scrapper.scraper import Scraper
+from scraper.scraper import Scraper
 
 # Define the URL of the profile to scrape
 profile_url = "https://www.example.com/profile"
