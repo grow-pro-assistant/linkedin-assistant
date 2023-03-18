@@ -1,6 +1,8 @@
 from model import Page
 from utils import fetch_page
-
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
 class Scraper:
     def __init__(self, url):
         self.url = url
