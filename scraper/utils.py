@@ -9,6 +9,7 @@ import re
 from collections import Counter
 import os
 import time
+import json
 
 def extract_shared_urls(text):
     """
@@ -64,9 +65,9 @@ def access_profile(USERNAME,PASSWORD):
     time.sleep(2)
 
     ### sign in to linkedin
-    signInButton = driver.find_element(By.XPATH,"/html/body/main/section[1]/div/form[1]/div[2]/button")
-    signInButton.click()
-
+ #   signInButton = driver.find_element(By.XPATH,"/html/body/main/section[1]/div/form[1]/div[2]/button")
+ #   signInButton.click()
+#/html/body/main/section[1]/div/div/form/div[2]/button
     ## input username and password to required fields
     email = driver.find_element(By.XPATH,'//*[@id="session_key"]')
     email.send_keys(USERNAME)
@@ -75,7 +76,7 @@ def access_profile(USERNAME,PASSWORD):
     password.send_keys(PASSWORD)
 
     ## press the login button after entering the details
-    login = driver.find_element(By.XPATH,'/html/body/main/section[1]/div/form[1]/div[2]/button')
+    login = driver.find_element(By.XPATH,'/html/body/main/section[1]/div/div/form/div[2]/button')
     login.click()
 
     ### goto profile and then recent activity link
@@ -102,3 +103,97 @@ def get_driver():
     driver = webdriver.Firefox(options=firefox_options, executable_path=r"..\driver\geckodriver.exe") ## path where driver is present
 
     return driver
+
+def scroll_page(driver):
+    #### getting posts that are gathered in 20 seconds of scroll
+    start=time.time()
+    n =20
+    lastHeight = driver.execute_script("return document.body.scrollHeight")
+    while True:
+        driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+        time.sleep(5)
+        newHeight = driver.execute_script("return document.body.scrollHeight")
+        if newHeight == lastHeight:
+            break
+        lastHeight = newHeight
+        end=time.time()
+        if round(end-start)>n:
+            break
+
+    return driver
+
+def extract_post(driver,id):
+    # extract post data
+    # ...
+    posts_source = driver.page_source 
+    linkedin_soup = bs4(posts_source.encode("utf-8"), "html")
+    linkedin_soup.prettify()
+    containers = linkedin_soup.findAll("div",{"class":"ember-view occludable-update"})
+    conn_names = Counter()
+    p_text,urls,actor,ids =[],[],[],[]
+    for container in containers:
+
+        try:
+            ids.append(id)
+            ## get poster's name
+            name_box = container.find("div",{"class":"update-components-actor"})
+            name = name_box.find("a")['href'].split("?")[0]
+            #name  = name.text.strip()
+            actor.append(name)
+            conn_names.update([name])
+
+            ## get post text  
+            text_box = container.find("div",{"class":"feed-shared-update-v2__description-wrapper"})
+            text = text_box.find("span",{"dir":"ltr"})
+            post_text = text.text.strip()
+            p_text.append(post_text)
+            #print(post_text)
+
+            ## extract urls
+            if "https" in post_text:
+                post_url = re.findall("(?P<url>https?://[^\s]+)", post_text)
+            else:
+                post_url = ""
+            #print(post_url)
+            urls.append(post_url)
+
+            ## increment id
+            id = id+1
+
+        except:
+            #print(text_box)
+            pass
+    print("total number of posts are: ",len(p_text))
+    print("total number of urls are: ",len(urls)-urls.count(""))
+    print("interacted with whom",conn_names)
+    return ids,p_text,actor,urls,conn_names,driver
+
+
+def write_json(ids,posts,actors,urls):
+    json_objects={}
+
+    for i in range(len(posts)):
+
+        entry = {f"id{i}": ids[i], f"person_name{i}": actors[i], f"text_description{i}": posts[i], f"url_links{i}": urls[i]}
+
+        json_objects.update(entry)
+
+
+    ## Write the scraped data to a JSON file
+    out_json("scraped_data.json",json_objects)
+
+
+def out_json(fname,data):
+    if os.path.exists(fname):
+    #read existing file and append new data
+        with open(fname,"r") as f:
+            loaded = json.load(f)
+        ##loaded.append({'appended': time.time()})
+        loaded.append(data)
+    else:
+        #create new json
+        loaded = [data]
+
+    #overwrite/create file
+    with open(fname,"w") as f:
+        json.dump(loaded,f)
