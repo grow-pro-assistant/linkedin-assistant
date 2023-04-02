@@ -10,6 +10,13 @@ from collections import Counter
 import os
 import time
 import json
+from .url_scraper.scraper import Scraper as Url_Scraper
+
+def get_url_text(url):
+    page = Url_Scraper(url)
+    page.scrape()
+    complete_text = page.metadata + '\n' + page.heading + '\n' + page.text 
+    return complete_text
 
 def extract_shared_urls(text):
     """
@@ -78,9 +85,11 @@ def access_profile(USERNAME,PASSWORD):
     ## press the login button after entering the details
     login = driver.find_element(By.XPATH,'/html/body/main/section[1]/div/div/form/div[2]/button')
     login.click()
+    time.sleep(3)
 
     ### goto profile and then recent activity link
-    own_profile = driver.find_element(By.XPATH,'/html/body/div[5]/div[3]/div/div/div[2]/div/div/div/div[1]/div[1]/a/div[2]')
+    #get linkedin profile link
+    own_profile = driver.find_element('css selector','.t-16.t-black.t-bold')
     ##profile = driver.find_element(By.CSS_SELECTOR,'div.t-16:nth-child(2)')
     own_profile.click()
 
@@ -169,12 +178,12 @@ def extract_post(driver,id):
     return ids,p_text,actor,urls,conn_names,driver
 
 
-def write_json(ids,posts,actors,urls):
+def write_json(ids,posts,actors,urls, url_texts):
     json_objects={}
 
     for i in range(len(posts)):
 
-        entry = {f"id{i}": ids[i], f"person_name{i}": actors[i], f"text_description{i}": posts[i], f"url_links{i}": urls[i]}
+        entry = {f"id{i}": ids[i], f"person_name{i}": actors[i], f"text_description{i}": posts[i], f"url_links{i}": urls[i], f"url_texts{i}": url_texts[i]}
 
         json_objects.update(entry)
 

@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import json
-from utils import parse_links
+from .utils import parse_links
 
 
 class Page:

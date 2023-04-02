@@ -1,0 +1,311 @@
+1680422971244	geckodriver	INFO	Listening on 127.0.0.1:60469
+1680423077991	geckodriver	INFO	Listening on 127.0.0.1:60685
+1680423081026	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--incognito" "--remote-debugging-port" "60 ... "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\RIJAFA~1\\AppData\\Local\\Temp\\rust_mozprofilehE6yZs"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1680423081869	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1680423081880	Marionette	INFO	Listening on port 60694
+console.error: "Warning: unrecognized command line flag -incognito\n"
+Read port: 60694
+WebDriver BiDi listening on ws://127.0.0.1:60686
+1680423082159	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\RIJAFA~1\\AppData\\Local\\Temp\\rust_mozprofilehE6yZs\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:60686/devtools/browser/05ad93c7-6be0-405d-a066-b18695ad5d01
+JavaScript warning: https://static.licdn.com/aero-v1/sc/h/97k7k764lu6w60qogwm3kpr4o, line 2: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://static.licdn.com/aero-v1/sc/h/97k7k764lu6w60qogwm3kpr4o, line 2: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.linkedin.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.linkedin.com."
+JavaScript warning: https://static.licdn.com/sc/h/52bxakfco5xjk0v2kjki29nyv, line 19287: unreachable code after return statement
+JavaScript warning: https://static.licdn.com/sc/h/f17qz9e0m1hoimr4034x8yatl, line 2519: unreachable code after return statement
+1680423188581	Marionette	INFO	Stopped listening on port 60694
+Dynamically enable window occlusion 1
+1680423200184	geckodriver	INFO	Listening on 127.0.0.1:60815
+1680423203215	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--incognito" "--remote-debugging-port" "60 ... "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\RIJAFA~1\\AppData\\Local\\Temp\\rust_mozprofile1AMXcC"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1680423203585	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1680423203594	Marionette	INFO	Listening on port 60823
+console.error: "Warning: unrecognized command line flag -incognito\n"
+Read port: 60823
+WebDriver BiDi listening on ws://127.0.0.1:60816
+1680423203761	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\RIJAFA~1\\AppData\\Local\\Temp\\rust_mozprofile1AMXcC\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:60816/devtools/browser/df60655c-34f2-4832-839f-a338939da6c0
+JavaScript warning: https://static.licdn.com/aero-v1/sc/h/97k7k764lu6w60qogwm3kpr4o, line 2: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://static.licdn.com/aero-v1/sc/h/97k7k764lu6w60qogwm3kpr4o, line 2: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.linkedin.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.linkedin.com."
+JavaScript warning: https://static.licdn.com/sc/h/52bxakfco5xjk0v2kjki29nyv, line 19287: unreachable code after return statement
+JavaScript warning: https://static.licdn.com/sc/h/f17qz9e0m1hoimr4034x8yatl, line 2519: unreachable code after return statement
+[Parent 34728, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:777
+1680423268466	Marionette	INFO	Stopped listening on port 60823
+Dynamically enable window occlusion 1
+1680423738961	geckodriver	INFO	Listening on 127.0.0.1:61211
+1680423742001	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--incognito" "--remote-debugging-port" "61 ... "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\RIJAFA~1\\AppData\\Local\\Temp\\rust_mozprofile3gSiTP"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1680423742383	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1680423742389	Marionette	INFO	Listening on port 61219
+Read port: 61219
+console.error: "Warning: unrecognized command line flag -incognito\n"
+WebDriver BiDi listening on ws://127.0.0.1:61212
+1680423742552	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\RIJAFA~1\\AppData\\Local\\Temp\\rust_mozprofile3gSiTP\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:61212/devtools/browser/2294facb-8c75-465b-b28a-086f621b6af4
+JavaScript warning: https://static.licdn.com/aero-v1/sc/h/97k7k764lu6w60qogwm3kpr4o, line 2: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://static.licdn.com/aero-v1/sc/h/97k7k764lu6w60qogwm3kpr4o, line 2: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.linkedin.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.linkedin.com."
+JavaScript warning: https://static.licdn.com/sc/h/52bxakfco5xjk0v2kjki29nyv, line 19287: unreachable code after return statement
+JavaScript warning: https://static.licdn.com/sc/h/f17qz9e0m1hoimr4034x8yatl, line 2519: unreachable code after return statement
+1680423752631	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+console.error: (new TypeError("parent is null", "resource://devtools/client/inspector/shared/style-change-tracker.js", 67))
+TypeError: parent is null: canMutationImpactCurrentStyles@resource://devtools/client/inspector/shared/style-change-tracker.js:67:24
+onMutations@resource://devtools/client/inspector/shared/style-change-tracker.js:84:41
+_emit@resource://devtools/shared/event-emitter.js:242:32
+emit@resource://devtools/shared/event-emitter.js:186:18
+emit@resource://devtools/shared/event-emitter.js:330:18
+getMutations@resource://devtools/client/fronts/walker.js:313:10
+
+console.error: "Error while calling actor 'pagestyle's method 'getApplied'" "node is null"
+console.error: (new TypeError("node is null", "resource://devtools/server/actors/page-style.js", 523))
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.error: "Failed to start [root-node] legacy listener for target null" (new Error("Connection closed, pending request to server0.conn0.windowGlobal6442450959/domwalker18, type watchRootNode failed\n\nRequest stack:\nrequest@resource://devtools/shared/protocol/Front.js:300:14\ngenerateRequestMethods/</frontProto[name]@resource://devtools/shared/protocol/Front/FrontClassWithSpec.js:47:19\nmodule.exports@resource://devtools/shared/commands/resource/legacy-listeners/root-node.js:60:31\n", "resource://devtools/shared/protocol/Front.js", 106))
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.error: (new TypeError("container.node.targetFront is null", "resource://devtools/client/inspector/markup/markup.js", 2397))
+console.error: "Error writing response to: getApplied"
+console.error: "Error while calling actor 'pagestyle's method 'getApplied'" "Attempted to write a response containing a destroyed actor"
+console.error: (new Error("Attempted to write a response containing a destroyed actor", "resource://devtools/shared/protocol/types.js", 358))
+console.error: "Error while calling actor 'pagestyle's method 'getLayout'" "node is null"
+console.error: (new TypeError("node is null", "resource://devtools/server/actors/page-style.js", 932))
+console.error: (new TypeError("container.node.targetFront is null", "resource://devtools/client/inspector/markup/markup.js", 2397))
+console.error: (new Error("Protocol error (TypeError): node is null from: server0.conn0.windowGlobal6442450948/pagestyle20 (resource://devtools/server/actors/page-style.js:932:5)", "resource://devtools/shared/protocol/Front.js", 383))
+JavaScript error: resource://gre/modules/AsyncShutdown.sys.mjs, line 576: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+JavaScript error: resource://gre/modules/AsyncShutdown.sys.mjs, line 576: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+JavaScript error: resource://gre/modules/AsyncShutdown.sys.mjs, line 576: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+JavaScript error: resource://gre/modules/AsyncShutdown.sys.mjs, line 576: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+1680424451028	Marionette	INFO	Stopped listening on port 61219
+Dynamically enable window occlusion 1
+[Parent 33104, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:777
+n ws://127.0.0.1:61526
+1680424294764	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\RIJAFA~1\\AppData\\Local\\Temp\\rust_mozprofilecYW3WH\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:61526/devtools/browser/5532e012-9d95-4027-adb7-8c21b5cb4a83
+JavaScript warning: https://static.licdn.com/aero-v1/sc/h/97k7k764lu6w60qogwm3kpr4o, line 2: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://static.licdn.com/aero-v1/sc/h/97k7k764lu6w60qogwm3kpr4o, line 2: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.linkedin.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.linkedin.com."
+JavaScript warning: https://static.licdn.com/sc/h/53pvxhwnu4814i1e9beje3cqa, line 89: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://linkedin-api.arkoselabs.com/cdn/fc/js/f9e9a66de775dbdbbe438a38c30dbefe118d3f49/standard/funcaptcha_api.js?onload=loadChallenge, line 2: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+console.error: (new TypeError("lazy.AsyncShutdown.profileBeforeChange is undefined", "resource://services-settings/Database.jsm", 603))
+JavaScript warning: https://static.licdn.com/sc/h/rvs9od16yl8hga5022exl4le, line 19474: unreachable code after return statement
+JavaScript warning: https://static.licdn.com/sc/h/d0pvjkrfutml89l676zaz3qs, line 2524: unreachable code after return statement
+1680424355413	Marionette	INFO	Stopped listening on port 61533
+Dynamically enable window occlusion 1
+1680424365232	geckodriver	INFO	Listening on 127.0.0.1:61689
+1680424368290	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--incognito" "--remote-debugging-port" "61 ... "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\RIJAFA~1\\AppData\\Local\\Temp\\rust_mozprofileWURo4d"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1680424368629	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1680424368635	Marionette	INFO	Listening on port 61698
+console.error: "Warning: unrecognized command line flag -incognito\n"
+WebDriver BiDi listening on ws://127.0.0.1:61690
+Read port: 61698
+1680424368883	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\RIJAFA~1\\AppData\\Local\\Temp\\rust_mozprofileWURo4d\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:61690/devtools/browser/ab9a5ac6-c1f9-474d-b9e9-864d053dedbd
+JavaScript warning: https://static.licdn.com/aero-v1/sc/h/97k7k764lu6w60qogwm3kpr4o, line 2: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://static.licdn.com/aero-v1/sc/h/97k7k764lu6w60qogwm3kpr4o, line 2: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.linkedin.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.linkedin.com."
+[Parent 27056, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:777
+JavaScript warning: https://static.licdn.com/sc/h/52bxakfco5xjk0v2kjki29nyv, line 19287: unreachable code after return statement
+JavaScript warning: https://static.licdn.com/sc/h/f17qz9e0m1hoimr4034x8yatl, line 2519: unreachable code after return statement
+1680424377770	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+h"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1680424521121	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1680424521128	Marionette	INFO	Listening on port 61871
+console.error: "Warning: unrecognized command line flag -incognito\n"
+Read port: 61871
+WebDriver BiDi listening on ws://127.0.0.1:61862
+1680424521263	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\RIJAFA~1\\AppData\\Local\\Temp\\rust_mozprofileLAsIeh\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:61862/devtools/browser/64fed952-94ab-4d6b-bf40-80f3c7fa7a96
+JavaScript warning: https://static.licdn.com/aero-v1/sc/h/97k7k764lu6w60qogwm3kpr4o, line 2: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://static.licdn.com/aero-v1/sc/h/97k7k764lu6w60qogwm3kpr4o, line 2: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.linkedin.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.linkedin.com."
+JavaScript warning: https://static.licdn.com/sc/h/52bxakfco5xjk0v2kjki29nyv, line 19287: unreachable code after return statement
+JavaScript warning: https://static.licdn.com/sc/h/f17qz9e0m1hoimr4034x8yatl, line 2519: unreachable code after return statement
+1680424530258	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+1680425178510	Marionette	INFO	Stopped listening on port 61871
+Dynamically enable window occlusion 1
+ng command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--incognito" "--remote-debugging-port" "62 ... "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\RIJAFA~1\\AppData\\Local\\Temp\\rust_mozprofilekIyU8a"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1680425101417	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1680425101423	Marionette	INFO	Listening on port 62282
+console.error: "Warning: unrecognized command line flag -incognito\n"
+Read port: 62282
+WebDriver BiDi listening on ws://127.0.0.1:62275
+1680425101603	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\RIJAFA~1\\AppData\\Local\\Temp\\rust_mozprofilekIyU8a\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:62275/devtools/browser/69fbb1a7-3512-4674-807f-9d631acf7a8b
+JavaScript warning: https://static.licdn.com/aero-v1/sc/h/97k7k764lu6w60qogwm3kpr4o, line 2: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://static.licdn.com/aero-v1/sc/h/97k7k764lu6w60qogwm3kpr4o, line 2: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.linkedin.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.linkedin.com."
+JavaScript warning: https://static.licdn.com/sc/h/52bxakfco5xjk0v2kjki29nyv, line 19287: unreachable code after return statement
+JavaScript warning: https://static.licdn.com/sc/h/f17qz9e0m1hoimr4034x8yatl, line 2519: unreachable code after return statement
+1680425113717	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+1680425183153	Marionette	INFO	Stopped listening on port 62282
+Dynamically enable window occlusion 1
+1680425767794	geckodriver	INFO	Listening on 127.0.0.1:62687
+1680425770829	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--incognito" "--remote-debugging-port" "62 ... "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\RIJAFA~1\\AppData\\Local\\Temp\\rust_mozprofilenBQ7ex"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1680425771337	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1680425771344	Marionette	INFO	Listening on port 62695
+Read port: 62695
+console.error: "Warning: unrecognized command line flag -incognito\n"
+WebDriver BiDi listening on ws://127.0.0.1:62688
+1680425771495	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\RIJAFA~1\\AppData\\Local\\Temp\\rust_mozprofilenBQ7ex\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:62688/devtools/browser/4cdf9134-ef81-450f-89b9-85e003cbadfc
+JavaScript warning: https://static.licdn.com/aero-v1/sc/h/97k7k764lu6w60qogwm3kpr4o, line 2: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://static.licdn.com/aero-v1/sc/h/97k7k764lu6w60qogwm3kpr4o, line 2: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.linkedin.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.linkedin.com."
+JavaScript warning: https://static.licdn.com/sc/h/52bxakfco5xjk0v2kjki29nyv, line 19287: unreachable code after return statement
+JavaScript warning: https://static.licdn.com/sc/h/f17qz9e0m1hoimr4034x8yatl, line 2519: unreachable code after return statement
+1680425781274	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+JavaScript error: resource://gre/modules/AsyncShutdown.sys.mjs, line 576: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+JavaScript error: resource://gre/modules/AsyncShutdown.sys.mjs, line 576: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+JavaScript error: resource://gre/modules/AsyncShutdown.sys.mjs, line 576: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+JavaScript error: resource://gre/modules/AsyncShutdown.sys.mjs, line 576: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+1680425821763	Marionette	INFO	Stopped listening on port 62695
+Dynamically enable window occlusion 1
+WARNING: A blocker encountered an error while we were waiting.
+          Blocker:  Waiting for ping task
+          Phase: TelemetryController: Waiting for pending ping activity
+          State: (none)
+WARNING: Error: Phase "profile-before-change" is finished, it is too late to register completiconsole.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\RIJAFA~1\\AppData\\Local\\Temp\\rust_mozprofileS7zF2L\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:62799/devtools/browser/e43d42c6-1bbb-4f6f-9187-19b64718a1e7
+JavaScript warning: https://static.licdn.com/aero-v1/sc/h/97k7k764lu6w60qogwm3kpr4o, line 2: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://static.licdn.com/aero-v1/sc/h/97k7k764lu6w60qogwm3kpr4o, line 2: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.linkedin.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.linkedin.com."
+JavaScript warning: https://static.licdn.com/sc/h/52bxakfco5xjk0v2kjki29nyv, line 19287: unreachable code after return statement
+JavaScript warning: https://static.licdn.com/sc/h/f17qz9e0m1hoimr4034x8yatl, line 2519: unreachable code after return statement
+1680425832247	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+1680425837669	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript warning: https://static.licdn.com/sc/h/52bxakfco5xjk0v2kjki29nyv, line 19287: unreachable code after return statement
+JavaScript warning: https://static.licdn.com/sc/h/f17qz9e0m1hoimr4034x8yatl, line 2519: unreachable code after return statement
+1680426048200	Marionette	INFO	Stopped listening on port 62809
+Dynamically enable window occlusion 1
+@resource://gre/modules/TelemetrySend.sys.mjs:241:30
+setupTelemetry/this._delayedInitTask<@resource://gre/modules/TelemetryControllerParent.sys.mjs:828:36
+observe@resource://gre/modules/AsyncShutdown.sys.mjs:576:16
+
+WARNING: A blocker encountered an error while we were waiting.
+          Blocker:  Waiting for ping task
+          Phase: TelemetryController: Waiting for pending ping activity
+          State: (none)
+WARNING: Error: Phase "profile-before-change" is finished, it is too late to register completion condition "OS.File: flush I/O queued before profileBeforeChange"
+WARNING: addBlocker@resource://gre/modules/AsyncShutdown.sys.mjs:727:15
+addBlocker@resource://gre/modules/AsyncShutdown.sys.mjs:523:26
+addBlocker@resource://gre/modules/AsyncShutdown.sys.mjs:458:15
+setupShutdown@resource://gre/modules/osfile/osfile_async_front.jsm:1548:28
+@resource://gre/modules/osfile/osfile_async_front.jsm:1568:16
+@resource://gre/modules/osfile.jsm:12:30
+@resource://gre/modules/TelemetryStorage.sys.mjs:10:28
+_checkPendingPings@resource://gre/modules/TelemetrySend.sys.mjs:863:17
+setup@resource://gre/modules/TelemetrySend.sys.mjs:803:18
+setup@resource://gre/modules/TelemetrySend.sys.mjs:241:30
+setupTelemetry/this._delayedInitTask<@resource://gre/modules/TelemetryControllerParent.sys.mjs:828:36
+observe@resource://gre/modules/AsyncShutdown.sys.mjs:576:16
+
+WARNING: A blocker encountered an error while we were waiting.
+          Blocker:  TelemetryController: shutting down
+          Phase: profile-before-change-telemetry
+          State: Error getting state: Error: Phase "profile-before-change" is finished, it is too late to register completion condition "OS.File: flush I/O queued before profileBeforeChange" at addBlocker@resource://gre/modules/AsyncShutdown.sys.mjs:727:15
+addBlocker@resource://gre/modules/AsyncShutdown.sys.mjs:523:26
+addBlocker@resource://gre/modules/AsyncShutdown.sys.mjs:458:15
+setupShutdown@resource://gre/modules/osfile/osfile_async_front.jsm:1548:28
+@resource://gre/modules/osfile/osfile_async_front.jsm:1568:16
+@resource://gre/modules/osfile.jsm:12:30
+@resource://gre/modules/TelemetryStorage.sys.mjs:10:28
+_checkPendingPings@resource://gre/modules/TelemetrySend.sys.mjs:863:17
+setup@resource://gre/modules/TelemetrySend.sys.mjs:803:18
+setup@resource://gre/modules/TelemetrySend.sys.mjs:241:30
+setupTelemetry/this._delayedInitTask<@resource://gre/modules/TelemetryControllerParent.sys.mjs:828:36
+observe@resource://gre/modules/AsyncShutdown.sys.mjs:576:16
+
+WARNING: Error: Phase "profile-before-change" is finished, it is too late to register completion condition "OS.File: flush I/O queued before profileBeforeChange"
+WARNING: addBlocker@resource://gre/modules/AsyncShutdown.sys.mjs:727:15
+addBlocker@resource://gre/modules/AsyncShutdown.sys.mjs:523:26
+addBlocker@resource://gre/modules/AsyncShutdown.sys.mjs:458:15
+setupShutdown@resource://gre/modules/osfile/osfile_async_front.jsm:1548:28
+@resource://gre/modules/osfile/osfile_async_front.jsm:1568:16
+@resource://gre/modules/osfile.jsm:12:30
+@resource://gre/modules/TelemetryStorage.sys.mjs:10:28
+_checkPendingPings@resource://gre/modules/TelemetrySend.sys.mjs:863:17
+setup@resource://gre/modules/TelemetrySend.sys.mjs:803:18
+setup@resource://gre/modules/TelemetrySend.sys.mjs:241:30
+setupTelemetry/this._delayedInitTask<@resource://gre/modules/TelemetryControllerParent.sys.mjs:828:36
+observe@resource://gre/modules/AsyncShutdown.sys.mjs:576:16
+
+JavaScript error: resource://gre/modules/AsyncShutdown.sys.mjs, line 727: Error: Phase "profile-before-change" is finished, it is too late to register completion condition "OS.File: flush I/O queued before profileBeforeChange"
+JavaScript error: resource://gre/modules/AsyncShutdown.sys.mjs, line 727: Error: Phase "profile-before-change" is finished, it is too late to register completion condition "OS.File: flush I/O queued before profileBeforeChange"
+JavaScript error: resource://gre/modules/AsyncShutdown.sys.mjs, line 727: Error: Phase "profile-before-change" is finished, it is too late to register completion condition "OS.File: flush I/O queued before profileBeforeChange"
+JavaScript error: resource://gre/modules/AsyncShutdown.sys.mjs, line 727: Error: Phase "profile-before-change" is finished, it is too late to register completion condition "OS.File: flush I/O queued before profileBeforeChange"
+JavaScript error: resource://gre/modules/AsyncShutdown.sys.mjs, line 727: Error: Phase "profile-before-change" is finished, it is too late to register completion condition "OS.File: flush I/O queued before profileBeforeChange"
+JavaScript error: resource://gre/modules/AsyncShutdown.sys.mjs, line 727: Error: Phase "profile-before-change" is finished, it is too late to register completion condition "OS.File: flush I/O queued before profileBeforeChange"
+1680426034755	geckodriver	INFO	Listening on 127.0.0.1:62966
+1680426037784	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "--incognito" "--remote-debugging-port" "62 ... "--remote-allow-hosts" "localhost" "-no-remote" "-profile" "C:\\Users\\RIJAFA~1\\AppData\\Local\\Temp\\rust_mozprofilefQA8pz"
+console.warn: services.settings: Ignoring preference override of remote settings server
+console.warn: services.settings: Allow by setting MOZ_REMOTE_SETTINGS_DEVTOOLS=1 in the environment
+1680426038195	Marionette	INFO	Marionette enabled
+Dynamically enable window occlusion 0
+1680426038203	Marionette	INFO	Listening on port 62980
+Read port: 62980
+console.error: "Warning: unrecognized command line flag -incognito\n"
+WebDriver BiDi listening on ws://127.0.0.1:62967
+1680426038392	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\RIJAFA~1\\AppData\\Local\\Temp\\rust_mozprofilefQA8pz\\search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:62967/devtools/browser/bbe392a2-10df-49e3-a074-83fee46dda83
+JavaScript warning: https://static.licdn.com/aero-v1/sc/h/97k7k764lu6w60qogwm3kpr4o, line 2: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://static.licdn.com/aero-v1/sc/h/97k7k764lu6w60qogwm3kpr4o, line 2: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.linkedin.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.linkedin.com."
+JavaScript warning: https://static.licdn.com/sc/h/52bxakfco5xjk0v2kjki29nyv, line 19287: unreachable code after return statement
+JavaScript warning: https://static.licdn.com/sc/h/f17qz9e0m1hoimr4034x8yatl, line 2519: unreachable code after return statement
+1680426048048	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+1680426052178	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript warning: https://static.licdn.com/sc/h/52bxakfco5xjk0v2kjki29nyv, line 19287: unreachable code after return statement
+JavaScript warning: https://static.licdn.com/sc/h/f17qz9e0m1hoimr4034x8yatl, line 2519: unreachable code after return statement
+1680426061545	Marionette	WARN	Ignoring event 'DOMContentLoaded' because document has an invalid readyState of 'complete'.

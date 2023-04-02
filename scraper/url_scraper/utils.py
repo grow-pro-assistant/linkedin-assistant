@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
+
 def parse_links(html, base_url = None):
     # Parse the page HTML to extract the links
     soup = BeautifulSoup(html, "html.parser")

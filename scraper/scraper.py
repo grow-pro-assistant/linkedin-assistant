@@ -6,6 +6,7 @@ import re
 from bs4 import BeautifulSoup as bs4
 from scraper import utils
 
+
 class Scraper:
     def __init__(self, profile_url, n_connections=1, min_interactions=1):
         """
@@ -35,8 +36,16 @@ class Scraper:
         driver = utils.scroll_page(driver)
         ids,p_text,actor,urls,conn_names,driver = utils.extract_post(driver,self.id)
 
+        url_texts = []
+
+        for post_urls in urls:
+            post_texts = []
+            for url in post_urls:
+                post_texts.append(utils.get_url_text(url))
+            url_texts.append('\n'.join(post_texts))
+
         self.id = ids[-1]
-        return ids,p_text,actor,urls,conn_names,driver    
+        return ids,p_text,actor,urls,conn_names,driver, url_texts
     
     def scrape_profile(self):
         """
@@ -65,6 +74,14 @@ class Scraper:
                 driver = utils.scroll_page(driver)
                 ids,posts,actors,urls,conn_names,driver = utils.extract_post(driver,self.id)
 
-                utils.write_json(ids,posts,actors,urls)
+                url_texts = []
+
+                for post_urls in urls:
+                    post_texts = []
+                    for url in post_urls:
+                        post_texts.append(utils.get_url_text(url))
+                    url_texts.append('\n'.join(post_texts))
+
+                utils.write_json(ids,posts,actors,urls, url_texts)
                 print("Saved posts for the profile {}".format(prof_link))
 
