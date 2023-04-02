@@ -1,15 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-def fetch_page(url):
-    # Fetch the page HTML using the requests library
-    response = requests.get(url)
-    html = response.content
-
-    # Return the page HTML
-    return html
-
-def parse_links(html, base_url):
+def parse_links(html, base_url = None):
     # Parse the page HTML to extract the links
     soup = BeautifulSoup(html, "html.parser")
     links = []
@@ -28,5 +20,7 @@ def make_absolute_url(url, base_url):
     # Make a URL absolute using the base URL
     if url.startswith("http"):
         return url
-    else:
+    elif base_url:
         return base_url + url
+    else:
+        return url
