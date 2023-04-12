@@ -3,6 +3,8 @@ import requests
 ### Importing required libraries
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.chrome.options import Options as ChromeOptions
+from selenium.webdriver.edge.options import Options as EdgeOptions
 from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup as bs4
 import re
@@ -63,9 +65,15 @@ def get_credentials():
 
     return USERNAME,PASSWORD
 
+def get_browser_info():
+    print("Select your browser")
+    browser = input("Press 'f' for Firefox \n 'c' for Google Chrome and \n 'e' for Microsoft Edge ")    
+    return browser
+
 def access_profile(USERNAME,PASSWORD):
 
-    driver = get_driver()
+    browser = get_browser_info()
+    driver = get_driver(browser)
     ## access linkedin
     url = "https://linkedin.com/"
     driver.get(url)
@@ -102,16 +110,38 @@ def access_profile(USERNAME,PASSWORD):
 
     
 
-def get_driver():
-    ### browser params for selenium
-    firefox_options = Options()
-    firefox_options.add_argument("--incognito")
-    firefox_options.binary_location = r'C:\Program Files\Mozilla Firefox\firefox.exe' ## give firefox exe path here
+def get_driver(browser):
 
-    ### running the webdriver
-    driver = webdriver.Firefox(options=firefox_options, executable_path=r"..\driver\geckodriver.exe") ## path where driver is present
+    match browser:
+        case 'f':
+        ### browser params for selenium
+            firefox_options = Options()
+            firefox_options.add_argument("--incognito")
+            firefox_options.binary_location = r'C:\Program Files\Mozilla Firefox\firefox.exe' ## give firefox exe path here
 
-    return driver
+            ### running the webdriver
+            driver = webdriver.Firefox(options=firefox_options, executable_path=r"..\driver\geckodriver.exe") ## path where driver is present
+
+            return driver
+        case 'c':
+            options = ChromeOptions()
+            driver = webdriver.Chrome(options=options)
+            return driver
+        case 'e':
+            options = EdgeOptions()
+            driver = webdriver.Edge(options=options)
+            return driver
+        case _:
+        ### browser params for selenium
+            firefox_options = Options()
+            firefox_options.add_argument("--incognito")
+            firefox_options.binary_location = r'C:\Program Files\Mozilla Firefox\firefox.exe' ## give firefox exe path here
+
+            ### running the webdriver
+            driver = webdriver.Firefox(options=firefox_options, executable_path=r"..\driver\geckodriver.exe") ## path where driver is present
+
+            return driver
+
 
 def scroll_page(driver):
     #### getting posts that are gathered in 20 seconds of scroll
