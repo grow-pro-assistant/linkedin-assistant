@@ -68,7 +68,7 @@ def get_credentials():
 
 def get_browser_info():
     print("Select your browser")
-    browser = input("Press 'f' for Firefox \n 'c' for Google Chrome and \n 'e' for Microsoft Edge ")    
+    browser = input("Press 'f' for Firefox \n 'c' for Google Chrome and \n 'e' for Microsoft Edge \n Your Selection: ")    
     return browser
 
 def access_profile(USERNAME,PASSWORD):
