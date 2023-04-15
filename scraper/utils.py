@@ -185,10 +185,8 @@ def write_json(data):
             f"person_name{i}": data["actor"][i],
             f"text_description{i}": data["p_text"][i],
             f"url_links{i}": data["urls"][i],
-            f"url_texts{i}": "",
+            f"url_texts{i}": data["url_texts"][i],
         }
-        if len(data["urls"][i]) > 0:
-            entry[f"url_texts{i}"] = data["urls"][i][0]
 
         json_objects.update(entry)
 

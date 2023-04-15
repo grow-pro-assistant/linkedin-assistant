@@ -34,10 +34,9 @@ class Scraper:
         print("Scrapping activity of {}".format(prof_link))
 
         driver = utils.scroll_page(driver)
-        ids,p_text,actor,urls,conn_names,driver = utils.extract_post(driver,self.id)
+        ids, p_text, actor, urls, conn_names, driver = utils.extract_post(driver, self.id)
 
         url_texts = []
-
         for post_urls in urls:
             post_texts = []
             for url in post_urls:
@@ -45,7 +44,17 @@ class Scraper:
             url_texts.append('\n'.join(post_texts))
 
         self.id = ids[-1]
-        return ids,p_text,actor,urls,conn_names,driver, url_texts
+
+    # Create a dictionary to store the scraped data
+        data = {
+            'ids': ids,
+            'p_text': p_text,
+            'actor': actor,
+            'urls': urls,
+            'url_texts': url_texts
+        }
+
+        return data, conn_names, driver
     
     def scrape_profile(self):
         """
