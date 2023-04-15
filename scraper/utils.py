@@ -12,6 +12,7 @@ from collections import Counter
 import os
 import time
 import json
+import getpass
 from .url_scraper.scraper import Scraper as Url_Scraper
 
 def get_url_text(url):
@@ -61,7 +62,7 @@ def get_profile():
 
 def get_credentials():
     USERNAME = input("Enter the username: ")
-    PASSWORD = input("Enter the password: ")
+    PASSWORD = getpass.getpass()
 
     return USERNAME,PASSWORD
 
@@ -91,7 +92,8 @@ def access_profile(USERNAME,PASSWORD):
     password.send_keys(PASSWORD)
 
     ## press the login button after entering the details
-    login = driver.find_element(By.XPATH,'/html/body/main/section[1]/div/div/form/div[2]/button')
+    #login = driver.find_element(By.XPATH,'/html/body/main/section[1]/div/div/form/div[2]/button')
+    login = driver.find_element('css selector','button.btn-primary')
     login.click()
     time.sleep(3)
 
