@@ -13,10 +13,10 @@ scraper = Scraper(profile_url)
 #profile = scraper.scrape_profile()
 
 ## Scrape the posts
-ids,posts,actors,urls,conn_names,driver, url_texts = scraper.scrape_posts(driver)
+data, conn_names, driver = scraper.scrape_posts(driver)
 
 
-utils.write_json(ids,posts,actors,urls, url_texts)
+utils.write_json(data)
 ## 
 del conn_names[profile_url]
 scraper.scrape_conn_posts(driver,conn_names)

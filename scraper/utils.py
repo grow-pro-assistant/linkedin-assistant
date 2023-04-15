@@ -59,7 +59,8 @@ def get_profile():
 
 def get_credentials():
     USERNAME = input("Enter the username: ")
-    PASSWORD = input("Enter the password: ")
+    # PASSWORD = input("Enter the password: ")
+    PASSWORD = ''
 
     return USERNAME,PASSWORD
 
@@ -69,7 +70,7 @@ def access_profile(USERNAME,PASSWORD):
     ## access linkedin
     url = "https://linkedin.com/"
     driver.get(url)
-    time.sleep(2)
+    time.sleep(5)
 
     ### sign in to linkedin
  #   signInButton = driver.find_element(By.XPATH,"/html/body/main/section[1]/div/form[1]/div[2]/button")
@@ -80,7 +81,7 @@ def access_profile(USERNAME,PASSWORD):
     email.send_keys(USERNAME)
 
     password = driver.find_element(By.XPATH,'//*[@id="session_password"]')
-    password.send_keys(PASSWORD)
+    # password.send_keys(PASSWORD)
 
     ## press the login button after entering the details
     login = driver.find_element(By.XPATH,'/html/body/main/section[1]/div/div/form/div[2]/button')
@@ -139,57 +140,61 @@ def extract_post(driver,id):
     linkedin_soup.prettify()
     containers = linkedin_soup.findAll("div",{"class":"ember-view occludable-update"})
     conn_names = Counter()
-    p_text,urls,actor,ids =[],[],[],[]
+    data = {"ids": [], "p_text": [], "urls": [], "actor": []}
     for container in containers:
+        if container is None:
+            print("None")
+        data["ids"].append(id)
+        ## get poster's name
+        name_box = container.find("div", {"class": "update-components-actor"})
+        name = name_box.find("a")['href'].split("?")[0]
+        #name  = name.text.strip()
+        data["actor"].append(name)
+        conn_names.update([name])
 
-        try:
-            ids.append(id)
-            ## get poster's name
-            name_box = container.find("div",{"class":"update-components-actor"})
-            name = name_box.find("a")['href'].split("?")[0]
-            #name  = name.text.strip()
-            actor.append(name)
-            conn_names.update([name])
+        ## get post text  
+        text_box = container.find("div", {"class": "feed-shared-update-v2__description-wrapper"})
+        text = text_box.find("span", {"dir": "ltr"})
+        post_text = text.text.strip()
+        data["p_text"].append(post_text)
+        #print(post_text)
 
-            ## get post text  
-            text_box = container.find("div",{"class":"feed-shared-update-v2__description-wrapper"})
-            text = text_box.find("span",{"dir":"ltr"})
-            post_text = text.text.strip()
-            p_text.append(post_text)
-            #print(post_text)
+        ## extract urls
+        if "https" in post_text:
+            post_url = re.findall("(?P<url>https?://[^\s]+)", post_text)
+        else:
+            post_url = ""
+        #print(post_url)
+        data["urls"].append(post_url)
 
-            ## extract urls
-            if "https" in post_text:
-                post_url = re.findall("(?P<url>https?://[^\s]+)", post_text)
-            else:
-                post_url = ""
-            #print(post_url)
-            urls.append(post_url)
+        ## increment id
+        id = id+1
 
-            ## increment id
-            id = id+1
-
-        except:
-            #print(text_box)
-            pass
-    print("total number of posts are: ",len(p_text))
-    print("total number of urls are: ",len(urls)-urls.count(""))
-    print("interacted with whom",conn_names)
-    return ids,p_text,actor,urls,conn_names,driver
+    print("total number of posts are: ", len(data["p_text"]))
+    print("total number of urls are: ", len(data["urls"]) - data["urls"].count(""))
+    print("interacted with whom", conn_names)
+    return data, conn_names, driver
 
 
-def write_json(ids,posts,actors,urls, url_texts):
-    json_objects={}
+def write_json(data):
+    json_objects = {}
 
-    for i in range(len(posts)):
-
-        entry = {f"id{i}": ids[i], f"person_name{i}": actors[i], f"text_description{i}": posts[i], f"url_links{i}": urls[i], f"url_texts{i}": url_texts[i]}
+    for i in range(len(data["p_text"])):
+        entry = {
+            f"id{i}": data["ids"][i],
+            f"person_name{i}": data["actor"][i],
+            f"text_description{i}": data["p_text"][i],
+            f"url_links{i}": data["urls"][i],
+            f"url_texts{i}": "",
+        }
+        if len(data["urls"][i]) > 0:
+            entry[f"url_texts{i}"] = data["urls"][i][0]
 
         json_objects.update(entry)
 
-
-    ## Write the scraped data to a JSON file
-    out_json("scraped_data.json",json_objects)
+    # Write the scraped data to a JSON file
+    with open("scraped_data.json", "w") as outfile:
+        json.dump(json_objects, outfile)
 
 
 def out_json(fname,data):
