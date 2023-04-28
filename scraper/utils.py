@@ -148,7 +148,7 @@ def get_driver(browser):
 def scroll_page(driver):
     #### getting posts that are gathered in 20 seconds of scroll
     start=time.time()
-    n =20
+    n =200
     lastHeight = driver.execute_script("return document.body.scrollHeight")
     while True:
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
@@ -179,7 +179,7 @@ def extract_post(driver,id):
             ## get poster's name
             name_box = container.find("div",{"class":"update-components-actor"})
             name = name_box.find("a")['href'].split("?")[0]
-            #name  = name.text.strip()
+            #name  = name.text .strip()
             actor.append(name)
             conn_names.update([name])
 
@@ -207,19 +207,21 @@ def extract_post(driver,id):
     print("total number of posts are: ",len(p_text))
     print("total number of urls are: ",len(urls)-urls.count(""))
     print("interacted with whom",conn_names)
+    #print(ids)
     return ids,p_text,actor,urls,conn_names,driver
 
 
-def write_json(ids,posts,actors,urls, url_texts):
-    json_objects={}
-
+def write_json(ids,posts,actors,urls, url_texts,max_id):
+    json_objects=[]
+    id_index = max_id-len(posts)
     for i in range(len(posts)):
 
-        entry = {f"id{i}": ids[i], f"person_name{i}": actors[i], f"text_description{i}": posts[i], f"url_links{i}": urls[i], f"url_texts{i}": url_texts[i]}
+        entry = {f"id": id_index+i, f"person_name": actors[i], f"text_description": posts[i], f"url_links": urls[i], f"url_texts": url_texts}
+        #print(entry)
+        json_objects.append(entry)
 
-        json_objects.update(entry)
 
-
+    #print(json_objects)
     ## Write the scraped data to a JSON file
     out_json("scraped_data.json",json_objects)
 
