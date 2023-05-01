@@ -3,6 +3,8 @@ import requests
 ### Importing required libraries
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.chrome.options import Options as ChromeOptions
+from selenium.webdriver.edge.options import Options as EdgeOptions
 from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup as bs4
 import re
@@ -10,6 +12,7 @@ from collections import Counter
 import os
 import time
 import json
+import getpass
 from .url_scraper.scraper import Scraper as Url_Scraper
 
 def get_url_text(url):
@@ -59,14 +62,20 @@ def get_profile():
 
 def get_credentials():
     USERNAME = input("Enter the username: ")
-    # PASSWORD = input("Enter the password: ")
-    PASSWORD = ''
+    PASSWORD = getpass.getpass()
+
 
     return USERNAME,PASSWORD
 
+def get_browser_info():
+    print("Select your browser")
+    browser = input("Press 'f' for Firefox \n 'c' for Google Chrome and \n 'e' for Microsoft Edge \n Your Selection: ")    
+    return browser
+
 def access_profile(USERNAME,PASSWORD):
 
-    driver = get_driver()
+    browser = get_browser_info()
+    driver = get_driver(browser)
     ## access linkedin
     url = "https://linkedin.com/"
     driver.get(url)
@@ -84,7 +93,8 @@ def access_profile(USERNAME,PASSWORD):
     # password.send_keys(PASSWORD)
 
     ## press the login button after entering the details
-    login = driver.find_element(By.XPATH,'/html/body/main/section[1]/div/div/form/div[2]/button')
+    #login = driver.find_element(By.XPATH,'/html/body/main/section[1]/div/div/form/div[2]/button')
+    login = driver.find_element('css selector','button.btn-primary')
     login.click()
     time.sleep(3)
 
@@ -103,21 +113,43 @@ def access_profile(USERNAME,PASSWORD):
 
     
 
-def get_driver():
-    ### browser params for selenium
-    firefox_options = Options()
-    firefox_options.add_argument("--incognito")
-    firefox_options.binary_location = r'C:\Program Files\Mozilla Firefox\firefox.exe' ## give firefox exe path here
+def get_driver(browser):
 
-    ### running the webdriver
-    driver = webdriver.Firefox(options=firefox_options, executable_path=r"..\driver\geckodriver.exe") ## path where driver is present
+    match browser:
+        case 'f':
+        ### browser params for selenium
+            firefox_options = Options()
+            firefox_options.add_argument("--incognito")
+            firefox_options.binary_location = r'C:\Program Files\Mozilla Firefox\firefox.exe' ## give firefox exe path here
 
-    return driver
+            ### running the webdriver
+            driver = webdriver.Firefox(options=firefox_options, executable_path=r"..\driver\geckodriver.exe") ## path where driver is present
+
+            return driver
+        case 'c':
+            options = ChromeOptions()
+            driver = webdriver.Chrome(options=options)
+            return driver
+        case 'e':
+            options = EdgeOptions()
+            driver = webdriver.Edge(options=options)
+            return driver
+        case _:
+        ### browser params for selenium
+            firefox_options = Options()
+            firefox_options.add_argument("--incognito")
+            firefox_options.binary_location = r'C:\Program Files\Mozilla Firefox\firefox.exe' ## give firefox exe path here
+
+            ### running the webdriver
+            driver = webdriver.Firefox(options=firefox_options, executable_path=r"..\driver\geckodriver.exe") ## path where driver is present
+
+            return driver
+
 
 def scroll_page(driver):
     #### getting posts that are gathered in 20 seconds of scroll
     start=time.time()
-    n =20
+    n =200
     lastHeight = driver.execute_script("return document.body.scrollHeight")
     while True:
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
@@ -144,48 +176,56 @@ def extract_post(driver,id):
     for container in containers:
         if container is None:
             print("None")
-        data["ids"].append(id)
-        ## get poster's name
-        name_box = container.find("div", {"class": "update-components-actor"})
-        name = name_box.find("a")['href'].split("?")[0]
-        #name  = name.text.strip()
-        data["actor"].append(name)
-        conn_names.update([name])
 
-        ## get post text  
-        text_box = container.find("div", {"class": "feed-shared-update-v2__description-wrapper"})
-        text = text_box.find("span", {"dir": "ltr"})
-        post_text = text.text.strip()
-        data["p_text"].append(post_text)
-        #print(post_text)
+        try:
+            data["ids"].append(id)
+            ## get poster's name
+            name_box = container.find("div",{"class":"update-components-actor"})
+            name = name_box.find("a")['href'].split("?")[0]
+            #name  = name.text .strip()
+            data["actor"].append(name)
+            conn_names.update([name])
 
-        ## extract urls
-        if "https" in post_text:
-            post_url = re.findall("(?P<url>https?://[^\s]+)", post_text)
-        else:
-            post_url = ""
-        #print(post_url)
-        data["urls"].append(post_url)
+            ## get post text  
+            text_box = container.find("div", {"class": "feed-shared-update-v2__description-wrapper"})
+            text = text_box.find("span", {"dir": "ltr"})
+            post_text = text.text.strip()
+            data["p_text"].append(post_text)
+            #print(post_text)
 
-        ## increment id
-        id = id+1
 
+            ## extract urls
+            if "https" in post_text:
+                post_url = re.findall("(?P<url>https?://[^\s]+)", post_text)
+            else:
+                post_url = ""
+            #print(post_url)
+            data["urls"].append(post_url)
+
+            ## increment id
+            id = id+1
+
+        except:
+            #print(text_box)
+            pass
     print("total number of posts are: ", len(data["p_text"]))
     print("total number of urls are: ", len(data["urls"]) - data["urls"].count(""))
     print("interacted with whom", conn_names)
     return data, conn_names, driver
 
 
-def write_json(data):
-    json_objects = {}
 
+def write_json(data, max_id):
+    json_objects = {}
+    id_index = max_id-len(data)
+    
     for i in range(len(data["p_text"])):
         entry = {
-            f"id{i}": data["ids"][i],
-            f"person_name{i}": data["actor"][i],
-            f"text_description{i}": data["p_text"][i],
-            f"url_links{i}": data["urls"][i],
-            f"url_texts{i}": data["url_texts"][i],
+            f"id": data["ids"][i+id_index],
+            f"person_name": data["actor"][i],
+            f"text_description": data["p_text"][i],
+            f"url_links": data["urls"][i],
+            f"url_texts": data["url_texts"][i],
         }
 
         json_objects.update(entry)
@@ -193,6 +233,21 @@ def write_json(data):
     # Write the scraped data to a JSON file
     with open("scraped_data.json", "w") as outfile:
         json.dump(json_objects, outfile)
+
+
+# def write_json(ids,posts,actors,urls, url_texts,max_id):
+#     json_objects=[]
+#     id_index = max_id-len(posts)
+#     for i in range(len(posts)):
+
+#         entry = {f"id": id_index+i, f"person_name": actors[i], f"text_description": posts[i], f"url_links": urls[i], f"url_texts": url_texts}
+#         #print(entry)
+#         json_objects.append(entry)
+
+
+#     #print(json_objects)
+#     ## Write the scraped data to a JSON file
+#     out_json("scraped_data.json",json_objects)
 
 
 def out_json(fname,data):

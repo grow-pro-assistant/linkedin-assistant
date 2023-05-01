@@ -15,8 +15,6 @@ scraper = Scraper(profile_url)
 ## Scrape the posts
 data, conn_names, driver = scraper.scrape_posts(driver)
 
-
-utils.write_json(data)
 ## 
 del conn_names[profile_url]
 scraper.scrape_conn_posts(driver,conn_names)

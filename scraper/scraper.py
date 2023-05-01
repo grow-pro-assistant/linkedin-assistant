@@ -32,29 +32,32 @@ class Scraper:
         prof_link = self.profile_url + "/recent-activity/"
         driver.get(prof_link)
         print("Scrapping activity of {}".format(prof_link))
-
+        
         driver = utils.scroll_page(driver)
-        ids, p_text, actor, urls, conn_names, driver = utils.extract_post(driver, self.id)
+        data, conn_names, driver = utils.extract_post(driver, self.id)
 
         url_texts = []
-        for post_urls in urls:
+        for post_urls in data['urls']:
             post_texts = []
             for url in post_urls:
                 post_texts.append(utils.get_url_text(url))
             url_texts.append('\n'.join(post_texts))
 
-        self.id = ids[-1]
-
-    # Create a dictionary to store the scraped data
-        data = {
-            'ids': ids,
-            'p_text': p_text,
-            'actor': actor,
-            'urls': urls,
-            'url_texts': url_texts
-        }
-
+        self.id = data['ids'][-1]
+        utils.write_json(data ,max_id=self.id)
         return data, conn_names, driver
+# =======
+
+# #         for post_urls in urls:
+# #            post_texts = []
+# #            for url in post_urls:
+# #                post_texts.append(utils.get_url_text(url))
+# #             url_texts.append('\n'.join(post_texts))
+#         if ids:
+#             self.id = ids[-1]+1
+#         utils.write_json(ids,p_text,actor,urls, url_texts,max_id=self.id)
+#         return ids,p_text,actor,urls,conn_names,driver, url_texts
+# >>>>>>> organization/scraper
     
     def scrape_profile(self):
         """
@@ -79,18 +82,22 @@ class Scraper:
                 prof_link = profile + "/recent-activity/"
                 driver.get(prof_link)
                 print("Scrapping activity of {}".format(prof_link))
+                
 
                 driver = utils.scroll_page(driver)
-                ids,posts,actors,urls,conn_names,driver = utils.extract_post(driver,self.id)
-
+                data,conn_names,driver = utils.extract_post(driver,self.id)
+                
                 url_texts = []
 
-                for post_urls in urls:
-                    post_texts = []
-                    for url in post_urls:
-                        post_texts.append(utils.get_url_text(url))
-                    url_texts.append('\n'.join(post_texts))
-
-                utils.write_json(ids,posts,actors,urls, url_texts)
+#                for post_urls in urls:
+#                    post_texts = []
+#                    for url in post_urls:
+#                        post_texts.append(utils.get_url_text(url))
+#                    url_texts.append('\n'.join(post_texts))
+                #print(ids)
+                if data['ids']:
+                    self.id = data['ids'][-1]+1
+                utils.write_json(data, url_texts,max_id=self.id)
                 print("Saved posts for the profile {}".format(prof_link))
+            
 
