@@ -14,11 +14,17 @@ import time
 import json
 import getpass
 from .url_scraper.scraper import Scraper as Url_Scraper
+from winreg import * ## to detect default browser
 
 def get_url_text(url):
     page = Url_Scraper(url)
+    
     page.scrape()
-    complete_text = page.metadata + '\n' + page.heading + '\n' + page.text 
+    complete_text = ''
+    try:
+        complete_text = page.metadata + '\n' + page.heading + '\n' + page.text
+    except Exception as e:
+        print(e) 
     return complete_text
 
 def extract_shared_urls(text):
@@ -68,8 +74,14 @@ def get_credentials():
     return USERNAME,PASSWORD
 
 def get_browser_info():
-    print("Select your browser")
-    browser = input("Press 'f' for Firefox \n 'c' for Google Chrome and \n 'e' for Microsoft Edge \n Your Selection: ")    
+    
+    ## Ask User
+    #print("Select your browser")
+    #browser = input("Press 'f' for Firefox \n 'c' for Google Chrome and \n 'e' for Microsoft Edge \n Your Selection: ")    
+    
+    ## detect the default browser
+    with OpenKey(HKEY_CURRENT_USER, r"Software\\Microsoft\\Windows\\Shell\\Associations\\UrlAssociations\\http\\UserChoice") as key:
+        browser = QueryValueEx(key, 'Progid')[0]
     return browser
 
 def access_profile(USERNAME,PASSWORD):
@@ -79,7 +91,7 @@ def access_profile(USERNAME,PASSWORD):
     ## access linkedin
     url = "https://linkedin.com/"
     driver.get(url)
-    time.sleep(5)
+    time.sleep(10)
 
     ### sign in to linkedin
  #   signInButton = driver.find_element(By.XPATH,"/html/body/main/section[1]/div/form[1]/div[2]/button")
@@ -90,7 +102,7 @@ def access_profile(USERNAME,PASSWORD):
     email.send_keys(USERNAME)
 
     password = driver.find_element(By.XPATH,'//*[@id="session_password"]')
-    # password.send_keys(PASSWORD)
+    password.send_keys(PASSWORD)
 
     ## press the login button after entering the details
     #login = driver.find_element(By.XPATH,'/html/body/main/section[1]/div/div/form/div[2]/button')
@@ -114,9 +126,9 @@ def access_profile(USERNAME,PASSWORD):
     
 
 def get_driver(browser):
-
+    
     match browser:
-        case 'f':
+        case 'Firefox':
         ### browser params for selenium
             firefox_options = Options()
             firefox_options.add_argument("--incognito")
@@ -126,11 +138,11 @@ def get_driver(browser):
             driver = webdriver.Firefox(options=firefox_options, executable_path=r"..\driver\geckodriver.exe") ## path where driver is present
 
             return driver
-        case 'c':
+        case 'Chrome':
             options = ChromeOptions()
             driver = webdriver.Chrome(options=options)
             return driver
-        case 'e':
+        case 'IE':
             options = EdgeOptions()
             driver = webdriver.Edge(options=options)
             return driver
@@ -149,7 +161,7 @@ def get_driver(browser):
 def scroll_page(driver):
     #### getting posts that are gathered in 20 seconds of scroll
     start=time.time()
-    n =200
+    n =10
     lastHeight = driver.execute_script("return document.body.scrollHeight")
     while True:
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
@@ -196,6 +208,7 @@ def extract_post(driver,id):
 
             ## extract urls
             if "https" in post_text:
+                
                 post_url = re.findall("(?P<url>https?://[^\s]+)", post_text)
             else:
                 post_url = ""
@@ -217,9 +230,15 @@ def extract_post(driver,id):
 
 def write_json(data, max_id):
     json_objects = {}
-    id_index = max_id-len(data)
-    
+    id_index = max_id-len(data['p_text'])+1
+
+#    print("max_id: {}".format(max_id))
+#    print("id_index {}".format(id_index))
+#    print("ids {}".format(data["ids"]))
+#    print("data len {}".format(len(data)))
+
     for i in range(len(data["p_text"])):
+        
         entry = {
             f"id": data["ids"][i+id_index],
             f"person_name": data["actor"][i],

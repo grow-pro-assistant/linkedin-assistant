@@ -43,6 +43,7 @@ class Scraper:
                 post_texts.append(utils.get_url_text(url))
             url_texts.append('\n'.join(post_texts))
 
+        data['url_texts'] = url_texts
         self.id = data['ids'][-1]
         utils.write_json(data ,max_id=self.id)
         return data, conn_names, driver
