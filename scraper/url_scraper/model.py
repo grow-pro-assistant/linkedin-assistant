@@ -64,6 +64,8 @@ class Page:
             # find the main content section of the article
             
             article = main_content.find('article')
+            if article is None:
+                article = main_content
             #print(article)
             # create an empty array to store JSON objects
             data = []

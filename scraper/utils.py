@@ -229,8 +229,8 @@ def extract_post(driver,id):
 
 
 def write_json(data, max_id):
-    json_objects = {}
-    id_index = max_id-len(data['p_text'])+1
+    json_objects = []
+#    id_index = max_id-len(data['p_text'])+1
 
 #    print("max_id: {}".format(max_id))
 #    print("id_index {}".format(id_index))
@@ -238,20 +238,22 @@ def write_json(data, max_id):
 #    print("data len {}".format(len(data)))
 
     for i in range(len(data["p_text"])):
-        
         entry = {
-            f"id": data["ids"][i+id_index],
+#            f"id": data["ids"][i+id_index],
+            f"id": data["ids"][i],
             f"person_name": data["actor"][i],
             f"text_description": data["p_text"][i],
             f"url_links": data["urls"][i],
             f"url_texts": data["url_texts"][i],
         }
 
-        json_objects.update(entry)
+        json_objects.append(entry)
 
+    #print(json_objects)
+    out_json("scraped_data.json",json_objects)
     # Write the scraped data to a JSON file
-    with open("scraped_data.json", "w") as outfile:
-        json.dump(json_objects, outfile)
+    #with open("scraped_data.json", "w") as outfile:
+    #    json.dump(json_objects, outfile)
 
 
 # def write_json(ids,posts,actors,urls, url_texts,max_id):

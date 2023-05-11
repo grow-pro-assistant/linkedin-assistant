@@ -90,15 +90,16 @@ class Scraper:
                 
                 url_texts = []
 
-#                for post_urls in urls:
-#                    post_texts = []
-#                    for url in post_urls:
-#                        post_texts.append(utils.get_url_text(url))
-#                    url_texts.append('\n'.join(post_texts))
+                for post_urls in data['urls']:
+                    post_texts = []
+                    for url in post_urls:
+                        post_texts.append(utils.get_url_text(url))
+                    url_texts.append('\n'.join(post_texts))
+                data['url_texts'] = url_texts
                 #print(ids)
                 if data['ids']:
-                    self.id = data['ids'][-1]+1
-                utils.write_json(data, url_texts,max_id=self.id)
+                    self.id = data['ids'][-1]
+                utils.write_json(data,max_id=self.id)
                 print("Saved posts for the profile {}".format(prof_link))
             
 
