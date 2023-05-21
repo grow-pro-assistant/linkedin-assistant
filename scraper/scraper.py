@@ -8,7 +8,7 @@ from scraper import utils
 
 
 class Scraper:
-    def __init__(self, profile_url, n_connections=1, min_interactions=1):
+    def __init__(self, profile_url, n_connections=1, min_interactions=2):
         """
         Initialize the Scraper class with the profile URL.
 
@@ -35,29 +35,9 @@ class Scraper:
         
         driver = utils.scroll_page(driver)
         data, conn_names, driver = utils.extract_post(driver, self.id)
-
-        url_texts = []
-        for post_urls in data['urls']:
-            post_texts = []
-            for url in post_urls:
-                post_texts.append(utils.get_url_text(url))
-            url_texts.append('\n'.join(post_texts))
-
-        self.id = data['ids'][-1]
-        utils.write_json(data ,max_id=self.id)
+        if data['ids']:
+            self.id = data['ids'][-1] +1
         return data, conn_names, driver
-# =======
-
-# #         for post_urls in urls:
-# #            post_texts = []
-# #            for url in post_urls:
-# #                post_texts.append(utils.get_url_text(url))
-# #             url_texts.append('\n'.join(post_texts))
-#         if ids:
-#             self.id = ids[-1]+1
-#         utils.write_json(ids,p_text,actor,urls, url_texts,max_id=self.id)
-#         return ids,p_text,actor,urls,conn_names,driver, url_texts
-# >>>>>>> organization/scraper
     
     def scrape_profile(self):
         """
@@ -69,35 +49,22 @@ class Scraper:
         # Send a request to the profile URL
         response = requests.get(self.profile_url)
         
-        # Parse the response and extract profile data
-        # ...
-        
-        # Create a Profile object and return it
-        # ...
 
-
-    def scrape_conn_posts(self,driver,conn_names):
+    def scrape_conn_posts(self,driver,conn_names, data):
         for profile,count in conn_names.items():
             if count >=self.min_interactions:
                 prof_link = profile + "/recent-activity/"
                 driver.get(prof_link)
-                print("Scrapping activity of {}".format(prof_link))
+                print("Scraping activity of {}".format(prof_link))
                 
 
-                driver = utils.scroll_page(driver)
-                data,conn_names,driver = utils.extract_post(driver,self.id)
+                temp_data,conn_names,driver = utils.extract_post(driver,self.id)
                 
                 url_texts = []
-
-#                for post_urls in urls:
-#                    post_texts = []
-#                    for url in post_urls:
-#                        post_texts.append(utils.get_url_text(url))
-#                    url_texts.append('\n'.join(post_texts))
-                #print(ids)
-                if data['ids']:
-                    self.id = data['ids'][-1]+1
-                utils.write_json(data, url_texts,max_id=self.id)
+                if temp_data['ids']:
+                    self.id = temp_data['ids'][-1]+1
                 print("Saved posts for the profile {}".format(prof_link))
+                z = {**data, **temp_data}
+        utils.write_json(data)
             
 

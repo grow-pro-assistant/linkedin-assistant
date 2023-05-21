@@ -16,8 +16,9 @@ scraper = Scraper(profile_url)
 data, conn_names, driver = scraper.scrape_posts(driver)
 
 ## 
-del conn_names[profile_url]
-scraper.scrape_conn_posts(driver,conn_names)
+print('profile_url;', profile_url)
+del conn_names[profile_url.strip('/')]
+scraper.scrape_conn_posts(driver,conn_names, data)
 
 
 """"

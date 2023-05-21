@@ -6,6 +6,8 @@ from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.edge.options import Options as EdgeOptions
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup as bs4
 import re
 from collections import Counter
@@ -16,8 +18,8 @@ import getpass
 from .url_scraper.scraper import Scraper as Url_Scraper
 
 def get_url_text(url):
-    page = Url_Scraper(url)
-    page.scrape()
+    url_scraper = Url_Scraper(url)
+    page = url_scraper.scrape()
     complete_text = page.metadata + '\n' + page.heading + '\n' + page.text 
     return complete_text
 
@@ -62,7 +64,9 @@ def get_profile():
 
 def get_credentials():
     USERNAME = input("Enter the username: ")
+    # USERNAME = 'xxxxxxx'
     PASSWORD = getpass.getpass()
+    # PASSWORD = 'xxxxxxx'
 
 
     return USERNAME,PASSWORD
@@ -79,32 +83,32 @@ def access_profile(USERNAME,PASSWORD):
     ## access linkedin
     url = "https://linkedin.com/"
     driver.get(url)
-    time.sleep(5)
+    wait = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "#session_key")))
 
     ### sign in to linkedin
  #   signInButton = driver.find_element(By.XPATH,"/html/body/main/section[1]/div/form[1]/div[2]/button")
  #   signInButton.click()
 #/html/body/main/section[1]/div/div/form/div[2]/button
     ## input username and password to required fields
-    email = driver.find_element(By.XPATH,'//*[@id="session_key"]')
+    email = driver.find_element(By.CSS_SELECTOR, "#session_key")
     email.send_keys(USERNAME)
 
-    password = driver.find_element(By.XPATH,'//*[@id="session_password"]')
-    # password.send_keys(PASSWORD)
+    password = driver.find_element(By.CSS_SELECTOR, "#session_password")
+    password.send_keys(PASSWORD)
 
     ## press the login button after entering the details
     #login = driver.find_element(By.XPATH,'/html/body/main/section[1]/div/div/form/div[2]/button')
     login = driver.find_element('css selector','button.btn-primary')
     login.click()
-    time.sleep(3)
 
     ### goto profile and then recent activity link
     #get linkedin profile link
-    own_profile = driver.find_element('css selector','.t-16.t-black.t-bold')
-    ##profile = driver.find_element(By.CSS_SELECTOR,'div.t-16:nth-child(2)')
-    own_profile.click()
+    wait = WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".feed-identity-module__actor-meta.break-words")))
+    own_profile = driver.find_element('css selector','.feed-identity-module__actor-meta.break-words').find_element('css selector','.ember-view.block').get_attribute("href")
 
-    own_profile_link = driver.current_url
+    ##profile = driver.find_element(By.CSS_SELECTOR,'div.t-16:nth-child(2)')
+    # own_profile.click()
+    own_profile_link = own_profile
 
     return own_profile_link,driver
 
@@ -114,46 +118,42 @@ def access_profile(USERNAME,PASSWORD):
     
 
 def get_driver(browser):
+    """
+    Returns a Selenium WebDriver instance based on the specified browser type.
 
-    match browser:
-        case 'f':
-        ### browser params for selenium
-            firefox_options = Options()
-            firefox_options.add_argument("--incognito")
-            firefox_options.binary_location = r'C:\Program Files\Mozilla Firefox\firefox.exe' ## give firefox exe path here
+    Args:
+        browser (str): The browser type (f for Firefox, c for Chrome, e for Edge).
 
-            ### running the webdriver
-            driver = webdriver.Firefox(options=firefox_options, executable_path=r"..\driver\geckodriver.exe") ## path where driver is present
+    Returns:
+        WebDriver: A Selenium WebDriver instance for the specified browser.
+    """
+    if browser == "f":
+        options = Options()
+        options.add_argument("--incognito")
+        options.binary_location = r"C:\Program Files\Mozilla Firefox\firefox.exe"
+        return webdriver.Firefox(options=options, executable_path=r"..\driver\geckodriver.exe")
+    elif browser == "c":
+        options = ChromeOptions()
+        return webdriver.Chrome(options=options)
+    elif browser == "e":
+        options = EdgeOptions()
+        return webdriver.Edge(options=options)
+    else:
+        options = Options()
+        options.add_argument("--incognito")
+        options.binary_location = r"C:\Program Files\Mozilla Firefox\firefox.exe"
+        return webdriver.Firefox(options=options, executable_path=r"..\driver\geckodriver.exe")
 
-            return driver
-        case 'c':
-            options = ChromeOptions()
-            driver = webdriver.Chrome(options=options)
-            return driver
-        case 'e':
-            options = EdgeOptions()
-            driver = webdriver.Edge(options=options)
-            return driver
-        case _:
-        ### browser params for selenium
-            firefox_options = Options()
-            firefox_options.add_argument("--incognito")
-            firefox_options.binary_location = r'C:\Program Files\Mozilla Firefox\firefox.exe' ## give firefox exe path here
-
-            ### running the webdriver
-            driver = webdriver.Firefox(options=firefox_options, executable_path=r"..\driver\geckodriver.exe") ## path where driver is present
-
-            return driver
 
 
 def scroll_page(driver):
     #### getting posts that are gathered in 20 seconds of scroll
     start=time.time()
-    n =200
+    n =3
     lastHeight = driver.execute_script("return document.body.scrollHeight")
     while True:
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-        time.sleep(5)
+        time.sleep(1)
         newHeight = driver.execute_script("return document.body.scrollHeight")
         if newHeight == lastHeight:
             break
@@ -167,100 +167,148 @@ def scroll_page(driver):
 def extract_post(driver,id):
     # extract post data
     # ...
-    posts_source = driver.page_source 
-    linkedin_soup = bs4(posts_source.encode("utf-8"), "html")
-    linkedin_soup.prettify()
-    containers = linkedin_soup.findAll("div",{"class":"ember-view occludable-update"})
+    wait = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "ember-view.occludable-update")))
+    buttons = driver.find_elements(By.CLASS_NAME, "profile-creator-shared-pills__pill.artdeco-pill.artdeco-pill--slate.artdeco-pill--choice.artdeco-pill--3.artdeco-pill--toggle")
+    # Click on each button and wait for the "ember-view occludable-update" class to appear
+    containers = []  
     conn_names = Counter()
-    data = {"ids": [], "p_text": [], "urls": [], "actor": []}
-    for container in containers:
-        if container is None:
-            print("None")
-
+    data = {"ids": [], "p_text": [], "urls": [], "actor": [], 'url_texts': []}
+    for button in buttons:
+        button.click()
         try:
-            data["ids"].append(id)
-            ## get poster's name
-            name_box = container.find("div",{"class":"update-components-actor"})
-            name = name_box.find("a")['href'].split("?")[0]
-            #name  = name.text .strip()
-            data["actor"].append(name)
-            conn_names.update([name])
-
-            ## get post text  
-            text_box = container.find("div", {"class": "feed-shared-update-v2__description-wrapper"})
-            text = text_box.find("span", {"dir": "ltr"})
-            post_text = text.text.strip()
-            data["p_text"].append(post_text)
-            #print(post_text)
-
-
-            ## extract urls
-            if "https" in post_text:
-                post_url = re.findall("(?P<url>https?://[^\s]+)", post_text)
-            else:
-                post_url = ""
-            #print(post_url)
-            data["urls"].append(post_url)
-
-            ## increment id
-            id = id+1
-
+            # check if there exists any entry/post under section
+            wait = WebDriverWait(driver, 1).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".profile-creator-shared-feed-update__container")))
         except:
-            #print(text_box)
-            pass
+            continue
+        scroll_page(driver)
+        #get first div under the post html 
+        containers  =  driver.find_elements(By.CSS_SELECTOR, ".feed-shared-update-v2.feed-shared-update-v2--minimal-padding.full-height.relative.artdeco-card")
+        print(len(containers))
+        for container in containers:
+            if container is None:
+                print("None")
+            # try:
+            elements = container.find_elements(By.CSS_SELECTOR, '*')
+            if len(elements) == 0:
+                continue
+            #print legnth of elements
+            print(len(elements))
+
+            try:
+                # Add ID to data
+                data["ids"].append(id)
+
+                # Get poster's name
+                name_box = container.find_element(By.CSS_SELECTOR, ".app-aware-link.update-components-actor__container-link.relative.display-flex.flex-grow-1")
+                name = name_box.get_attribute("href").split("?")[0]
+                conn_names[name] += 1
+                data["actor"].append(name)
+                print('name', name)
+
+                # Get post text
+                text_box = container.find_element(By.CSS_SELECTOR, ".update-components-text.relative.feed-shared-update-v2__commentary")
+                text = text_box.find_element(By.CSS_SELECTOR, "span[dir='ltr']")
+                post_text = text.text.strip()
+                print('post_text:', post_text[:15]  )
+                data["p_text"].append(post_text)
+
+                # Extract URLs from post text
+                if "https" in post_text:
+                    post_urls = re.findall("(?P<url>https?://[^\s]+)", post_text)
+                else:
+                    post_urls = []
+                data["urls"].append(post_urls)
+
+                ## increment id
+                id = id+1
+                # except:
+                #     continue
+            except:
+                for element in elements:
+                    class_attr = element.get_attribute('class')
+                    if class_attr:
+                        print(f"Element with class attribute '{class_attr}':")
+                        print(f"CSS Selector: .{class_attr.replace(' ', '.')}")
+    if not buttons:
+        try:
+            # check if there exists any entry/post under section
+            wait = WebDriverWait(driver, 1).until(EC.presence_of_element_located((By.CSS_SELECTOR, ".profile-creator-shared-feed-update__container")))
+        except:
+            return data, conn_names, driver
+        scroll_page(driver)
+        #get first div under the post html 
+        containers  =  driver.find_elements(By.CSS_SELECTOR, ".feed-shared-update-v2.feed-shared-update-v2--minimal-padding.full-height.relative.artdeco-card")
+        print(len(containers))
+        for container in containers:
+            if container is None:
+                print("None")
+            elements = container.find_elements(By.CSS_SELECTOR, '*')
+            if len(elements) == 0:
+                continue
+            #print legnth of elements
+            print(len(elements))
+            try:
+                # Add ID to data
+                data["ids"].append(id)
+
+                # Get poster's name
+                name_box = container.find_element(By.CSS_SELECTOR, ".app-aware-link.update-components-actor__container-link.relative.display-flex.flex-grow-1")
+                name = name_box.get_attribute("href").split("?")[0]
+                conn_names[name] += 1
+                data["actor"].append(name)
+                print('name', name)
+
+                # Get post text
+                text_box = container.find_element(By.CSS_SELECTOR, ".update-components-text.relative.feed-shared-update-v2__commentary")
+                text = text_box.find_element(By.CSS_SELECTOR, "span[dir='ltr']")
+                post_text = text.text.strip()
+                print('post_text:', post_text[:15]  )
+                data["p_text"].append(post_text)
+
+                # Extract URLs from post text
+                if "https" in post_text:
+                    post_urls = re.findall("(?P<url>https?://[^\s]+)", post_text)
+                else:
+                    post_urls = []
+                data["urls"].append(post_urls)
+
+                ## increment id
+                id = id+1
+            except:
+                for element in elements:
+                    class_attr = element.get_attribute('class')
+                    if class_attr:
+                        print(f"Element with class attribute '{class_attr}':")
+                        print(f"CSS Selector: .{class_attr.replace(' ', '.')}")
     print("total number of posts are: ", len(data["p_text"]))
     print("total number of urls are: ", len(data["urls"]) - data["urls"].count(""))
     print("interacted with whom", conn_names)
+
+
+    url_texts = []
+    for post_urls in data['urls']:
+        post_texts = []
+        for url in post_urls:
+            post_texts.append(get_url_text(url))
+        data['url_texts'].append('\n'.join(post_texts))
     return data, conn_names, driver
 
 
 
-def write_json(data, max_id):
-    json_objects = {}
-    id_index = max_id-len(data)
+def write_json(data):
+    json_objects = []
     
     for i in range(len(data["p_text"])):
         entry = {
-            f"id": data["ids"][i+id_index],
+            f"id": data["ids"][i],
             f"person_name": data["actor"][i],
             f"text_description": data["p_text"][i],
             f"url_links": data["urls"][i],
             f"url_texts": data["url_texts"][i],
         }
 
-        json_objects.update(entry)
+        json_objects.append(entry)
 
     # Write the scraped data to a JSON file
-    with open("scraped_data.json", "w") as outfile:
-        json.dump(json_objects, outfile)
-
-
-# def write_json(ids,posts,actors,urls, url_texts,max_id):
-#     json_objects=[]
-#     id_index = max_id-len(posts)
-#     for i in range(len(posts)):
-
-#         entry = {f"id": id_index+i, f"person_name": actors[i], f"text_description": posts[i], f"url_links": urls[i], f"url_texts": url_texts}
-#         #print(entry)
-#         json_objects.append(entry)
-
-
-#     #print(json_objects)
-#     ## Write the scraped data to a JSON file
-#     out_json("scraped_data.json",json_objects)
-
-
-def out_json(fname,data):
-    if os.path.exists(fname):
-    #read existing file and append new data
-        with open(fname,"r") as f:
-            loaded = json.load(f)
-        ##loaded.append({'appended': time.time()})
-        loaded.append(data)
-    else:
-        #create new json
-        loaded = [data]
-
-    #overwrite/create file
-    with open(fname,"w") as f:
-        json.dump(loaded,f)
+    with open("scraped_data.json", "w", encoding="utf-8") as outfile:
+        json.dump(json_objects, outfile, ensure_ascii=False, indent=4)

@@ -60,8 +60,8 @@ class Page:
             if footer:
                 footer.extract()
         
-        # find the main content section of the article
-        article = main_content.find('article')
+        # # find the main content section of the article
+        # article = main_content.find('article')
         
         # create an empty array to store JSON objects
         data = []
@@ -73,7 +73,7 @@ class Page:
         found_first_header = False
         
         # add all text and list elements before the first header tag to the dummy header object
-        for tag in article.find_all(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'ol', 'ul']):
+        for tag in main_content.find_all(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'ol', 'ul']):
             text = tag.text.strip().replace(u'\xa0', u' ').replace('\n\n', ' ').replace('"', '\\"').replace(u'\u2026', '...').replace(u'\u2019', "'").replace(u'\u201c', '"').replace(u'\u201d', '"')
             if not found_first_header:
                 # check if the current tag is a header tag
