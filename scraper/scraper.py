@@ -64,7 +64,7 @@ class Scraper:
                 if temp_data['ids']:
                     self.id = temp_data['ids'][-1]+1
                 print("Saved posts for the profile {}".format(prof_link))
-                z = {**data, **temp_data}
+                utils.write_json(temp_data)
         utils.write_json(data)
             
 

@@ -3,7 +3,7 @@ from scraper.scraper import Scraper
 from scraper import utils
 
 ## Define the URL of the profile to scrape
-profile_url,driver = utils.get_profile()
+profile_url, driver = utils.access_profile()
 
 ## Create a Scraper object with the profile URL
 scraper = Scraper(profile_url)
